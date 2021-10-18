@@ -14,7 +14,7 @@
 
 using namespace std;
 
-#define MAXSIZE 100000
+#define MAXSIZE 100
 
 //sorting
 //function declarations
@@ -41,11 +41,11 @@ int main()
     quick[i] = temp;
   }
   //make sure the arrays are the same, so we can best test which is most efficient
-  /*
+  
   for(int i = 0; i<MAXSIZE;i++)
   {
     cout<<heap[i]<<"\t"<<merge[i]<<"\t"<<quick[i]<<endl;
-  }*/
+  }
   //time heap sort
   std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
   heapSort(heap,MAXSIZE);
@@ -68,11 +68,11 @@ int main()
   cout << "quickSort took " << time_span.count() << " seconds."<<endl;
 
   //print the new arrrays
-  /*
+  
   for(int i = 0; i<MAXSIZE;i++)
   {
     cout<<heap[i]<<"\t"<<merge[i]<<"\t"<<quick[i]<<endl;
-  }*/
+  }
   return 0;
 }
 
@@ -170,7 +170,10 @@ void mergeSort(int toMerge[], int left,int right, int size)
     //recursivley call mergeSort
     //YOUR CODE GOES HERE
     //YOUR CODE GOES HERE
-    //but the whole thing together
+    mergeSort(toMerge, left, mid, size);
+    mergeSort(toMerge, mid+1, right, size);
+    //put the whole thing together
+    merge(toMerge, left, mid, right, size);
     //YOUR CODE GOES HERE
   }
 }
@@ -198,6 +201,9 @@ void heapify(int arr[], int size, int index)
     //YOUR CODE GOES HERE
     // Recursively heapify the affected sub-tree
     //YOUR CODE GOES HERE
+    swap(arr[index], arr[largestPos]);
+    heapify(arr, size, largestPos);
+
   }
 
 }
